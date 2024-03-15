@@ -1,5 +1,6 @@
 // Application.cpp
 
+#include <iostream>
 #include "Application.h"
 #include "TextureLoader.h"
 
@@ -23,6 +24,10 @@ void Application::run() {
     bool quit = false;
     SDL_Event event;
 
+    std::vector<int> data = createData(130);
+
+    std::cout << data.size() << std::endl;
+
     while (!quit) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -38,13 +43,23 @@ void Application::run() {
         // Clear the screen
         window.clear();
 
-        // Render the buttons
-        triangle.render(window.getRenderer());
-        Bar.render(window.getRenderer());
-        //stopButton.render(window.getRenderer());
-        playButton.render(window.getRenderer());
-        // Render other buttons if created
+    
 
+        for(int i = 0; i <= data.size(); ++i){
+            SDL_Rect rect = {i*7, 600, 7, -data[i]};
+
+         
+            SDL_SetRenderDrawColor(window.getRenderer(), 100,180,100,0);
+            SDL_RenderFillRect(window.getRenderer(), &rect);
+        }
+        
+        //4th param is Y value. negative goes up.
+
+        // SDL_Rect rect = {5, 599, 7, 10};
+        // SDL_Rect recttwo = {12, 599, 7, -10};
+        // SDL_SetRenderDrawColor(window.getRenderer(), 7,215,230,0);
+        // SDL_RenderFillRect(window.getRenderer(), &rect);
+        // SDL_RenderFillRect(window.getRenderer(), &recttwo);
         // Update the screen
         window.present();
     }
@@ -53,4 +68,13 @@ void Application::run() {
 // Function to load a texture from an image file
 SDL_Texture* Application::loadTexture(const char* filePath, SDL_Renderer* renderer) {
     return TextureLoader::loadTexture(filePath, renderer);
+}
+
+std::vector<int> Application::createData(const int size) {
+    std::vector<int> vector(size);
+    for(int i = 0; i < size; i++){
+        vector[i] = (rand() % 250);
+    }
+
+    return vector;
 }

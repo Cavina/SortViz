@@ -2,6 +2,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include <vector>
 #include "Window.h"
 #include "StopButton.h"
 #include "UIBar.h"
@@ -36,6 +37,7 @@ private:
     //Accepts a pointer to the SDL_Renderer.
     //Returns a pointer to the SDL_Texture
     SDL_Texture* loadTexture(const char* filePath, SDL_Renderer* renderer);
+    std::vector<int> createData(const int size);
 };
 
 #endif // APPLICATION_H
