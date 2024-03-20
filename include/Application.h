@@ -26,18 +26,17 @@ public:
 
 private:
     Window window;
-    StopButton stopButton;
-    StopButton playButton;
-    
-    UIBar Bar; 
-    Triangle triangle;
 
     //Loads an SDL texture.
     //Accepts a const pointer to char for filePath
     //Accepts a pointer to the SDL_Renderer.
     //Returns a pointer to the SDL_Texture
     SDL_Texture* loadTexture(const char* filePath, SDL_Renderer* renderer);
-    std::vector<int> createData(const int size);
+    std::vector<int> createDataVector(const int &size);
+    void renderDataVisualizations(std::vector<int> &data);
+    void selectAndRenderBar(int i, const std::vector<int> &data, SDL_Color color);
+    void visualize(int x, int y, int z, const std::vector<int> &data);
+    void bubbleSort(std::vector<int> &data);
 };
 
 #endif // APPLICATION_H
