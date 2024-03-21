@@ -32,14 +32,35 @@ void Application::run() {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
                 quit = true;
-            } 
+                complete = false;
+            } else if(event.type == SDL_KEYDOWN) {
+                switch(event.key.keysym.sym) {
+                    case(SDLK_q):
+                        quit = true;
+                        complete = false;
+                        break;
+                    case(SDLK_0):
+                        data = createDataVector(130);
+                        complete = false;
+                        break;
+                    case(SDLK_1):
+                        complete = false;
+                        bubbleSort(data);
+                        complete = true;
+                        break;
+
+                }
+            }
         }
         // Clear the screen
         window.clear();
-        bubbleSort(data);     
-
+        //bubbleSort(data);     
+        if (complete) {
+            renderDataVisualizations(data);
+            //window.present();
+        }
+        
         window.present();
-    
     }
 }
 
@@ -64,10 +85,15 @@ std::vector<int> Application::createDataVector(const int &size) {
 
 void Application::renderDataVisualizations(std::vector<int> &data)
 {
+    auto renderer = window.getRenderer();
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
     for(unsigned int i = 0; i < data.size(); ++i){
+        SDL_PumpEvents();
         SDL_Rect rect = {i*BAR_WIDTH, SCREEN_HEIGHT, BAR_WIDTH, -data[i]};
-        SDL_SetRenderDrawColor(window.getRenderer(), 100,180,100,0);
-        SDL_RenderFillRect(window.getRenderer(), &rect);
+        SDL_SetRenderDrawColor(renderer, 100,180,100,0);
+        SDL_RenderDrawRect(renderer, &rect);
+
     }
 }
 
@@ -80,7 +106,7 @@ void Application::visualize(int firstIndex, int secondIndex, int pivotIndex, con
     for (unsigned int i = 0; i < data.size(); ++i) {
         SDL_PumpEvents();
 
-        SDL_Rect rect = {i * BAR_WIDTH, SCREEN_HEIGHT, BAR_WIDTH, -data[i]};
+        SDL_Rect rect = {i * BAR_WIDTH, SCREEN_HEIGHT, BAR_WIDTH, -data[j]};
         if (complete) {
             SDL_SetRenderDrawColor(renderer, 100, 180, 100, 0);
             SDL_RenderDrawRect(renderer, &rect);
@@ -108,7 +134,7 @@ void Application::bubbleSort(std::vector<int> &data)
         for (int j = 0; j < n-i-1; j++)
         {
             // Highlight elements being compared
-            visualize(j, j+1, j+2, data);
+            visualize(j+1, j, -1, data);
 
             if (data[j] > data[j+1])
             {
@@ -119,7 +145,8 @@ void Application::bubbleSort(std::vector<int> &data)
             }
 
             // Render after swapping
-            visualize(j, j+1, j+2, data);
+            visualize(j+1, j, -1, data);
+            
         }
     }
     // Mark sorting as complete
