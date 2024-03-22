@@ -24,7 +24,7 @@ void Application::run() {
     SDL_Event event;
 
     std::vector<int> data = createDataVector(114);
-    
+
     while (!quit) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
