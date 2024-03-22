@@ -6,12 +6,18 @@ SortViz is a visualization tool designed to help users understand sorting algori
 
 Understanding sorting algorithms is fundamental to computer science and programming. SortViz aims to make this learning process more engaging and intuitive by providing real-time visualizations of sorting algorithms. With SortViz, users can witness the step-by-step process of sorting and observe how different algorithms rearrange elements to achieve a sorted sequence.
 
+This project is still under development. 
+
 ## Features
 
-- Visualization of the bubble sort algorithm.
+- Visualization of the bubble sort algorithm. (More to be added)
 - Random data generation for sorting demonstrations.
 - Interactive controls to initiate sorting, generate new data, and quit the application.
 
+## Todo
+- Implement additional sorting algorithms
+- Implement the accompanying controls
+- Create a Docker image of the project to provide easy access to demonstrating the project
 ## Usage
 
 1. Press `0` to generate a new set of random data.
@@ -23,7 +29,7 @@ Understanding sorting algorithms is fundamental to computer science and programm
 ### Prerequisites
 
 - C++ compiler
-- SDL library
+- SDL2 library
 
 ### Installation
 
