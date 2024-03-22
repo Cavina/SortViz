@@ -24,34 +24,6 @@ This project is still under development.
 2. Press `1` to visualize the bubble sort algorithm.
 3. Press `q` to quit the application.
 
-## Getting Started
-
-### Prerequisites
-
-- C++ compiler
-- SDL2 library
-
-### Installation
-
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/your_username/SortViz.git
-    Note, you will need to install SDL and create symlinks in the project to those locations
-    ```
-
-2. Compile the code:
-
-    ```bash
-    g++ Application.cpp -o SortViz -lSDL2
-    ```
-
-3. Run the executable:
-
-    ```bash
-    ./SortViz
-    ```
-
 
 ## License
 
