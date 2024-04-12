@@ -37,6 +37,8 @@ private:
     void selectAndRenderBar(int i, const std::vector<int> &data, SDL_Color color);
     void visualize(const int &firstIndex, const int &secondIndex, const int &pivotIndex, const std::vector<int> &data);
     void bubbleSort(std::vector<int> &data);
+    void merge(std::vector<int> &data, const int &start, const int &mid, const int &end);
+    void mergeSort(std::vector<int> &data, const int &start, const int &end);
 };
 
 #endif // APPLICATION_H

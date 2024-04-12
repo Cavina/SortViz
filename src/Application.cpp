@@ -49,7 +49,15 @@ void Application::run() {
                         bubbleSort(data);
                         complete = true;
                         break;
-                }
+                    case(SDLK_2):
+                        if (complete) {
+                            window.clear();
+                            data = createDataVector(114);
+                        }
+                        complete = false;
+                        mergeSort(data, 0, data.size()-1);
+                        complete = true;
+                        break;}
             }
         }
         // Clear the screen
@@ -150,4 +158,78 @@ void Application::bubbleSort(std::vector<int> &data)
     complete = true;
     // Render final state
     visualize(-1, -1, -1, data);
+}
+
+void Application::merge(std::vector<int> &data, const int& start, const int& mid, const int &end)
+{
+    const int n1 = mid - start + 1;
+    const int n2 = end - mid;
+
+    std::vector<int> left;
+    std::vector<int> right;
+
+    for (int i = 0; i < n1; i++) {
+        left.push_back(data[start+i]);
+    }
+    for (int i = 0; i < n2; i++){
+        right.push_back(data[mid+i+1]);
+    }
+
+    unsigned int leftix = 0;
+    unsigned int rightix = 0;
+
+    unsigned int mergedix = start;
+
+    while (leftix < n1 && rightix < n2){
+        if (left[leftix] <= right[rightix]){
+            data[mergedix] = left[leftix];
+            visualize(leftix, rightix, -1, data);
+            leftix++;
+        }
+        else
+        {
+            data[mergedix] = right[rightix];
+            visualize(leftix, rightix, -1, data);
+            rightix++;
+        }
+        mergedix++;
+    }
+
+    while (leftix < n1){
+        data[mergedix] = left[leftix];
+        visualize(-1, leftix, -1, data);
+        leftix++;
+        mergedix++;
+    }
+
+    while (rightix < n2){
+        data[mergedix] = right[rightix];
+        visualize(-1, rightix, -1, data);
+        rightix++;
+        mergedix++;
+    }
+
+    int x = 0;
+    for (int l = start; l <= end; l++)
+    {
+        visualize(l, -1, -1, data);
+        SDL_Delay(15);
+        x++;
+    }
+
+}
+
+
+void Application::mergeSort(std::vector<int> &data, const int &start, const int &end)
+{
+    if (start >= end) {
+        return;
+    }
+
+    int mid = start + (end-start) / 2;
+    mergeSort(data, start, mid);
+    mergeSort(data, mid+1, end);
+    merge(data, start, mid, end);
+
+
 }
