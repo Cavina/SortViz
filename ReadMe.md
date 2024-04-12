@@ -22,6 +22,7 @@ This project is still under development.
 
 1. Press `0` to generate a new set of random data.
 2. Press `1` to visualize the bubble sort algorithm.
+3. Press `2` ro visualize the merge sort algorithm.
 3. Press `q` to quit the application.
 
 
