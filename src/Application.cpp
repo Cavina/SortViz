@@ -94,7 +94,7 @@ void Application::renderDataVisualizations(std::vector<int> &data)
     auto renderer = window.getRenderer();
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
-    for(unsigned int i = 0; i < data.size(); ++i){
+    for(int i = 0; i < data.size(); ++i){
         SDL_PumpEvents();
         SDL_Rect rect = {i*BAR_WIDTH, SCREEN_HEIGHT, BAR_WIDTH, -data[i]};
         SDL_SetRenderDrawColor(renderer, 100,180,100,0);
@@ -109,7 +109,7 @@ void Application::visualize(const int &firstIndex, const int &secondIndex, const
     SDL_RenderClear(renderer);
 
     int j = 0;
-    for (unsigned int i = 0; i < data.size(); ++i) {
+    for (int i = 0; i < data.size(); ++i) {
         SDL_PumpEvents();
 
         SDL_Rect rect = {i * BAR_WIDTH, SCREEN_HEIGHT, BAR_WIDTH, -data[j]};
